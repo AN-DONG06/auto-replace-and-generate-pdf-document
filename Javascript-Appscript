@@ -1,5 +1,5 @@
 function replaceDocument() {
-  const TemplateDoc = "1NBMLOUZFKur_mnhc_QeTBoIimmq_rbWstpIBeU5Ijnw";
+  const TemplateDoc = "TemplateDocsID;
   const LinkCol = 6;
   const InputSheet = "Test";
   const DocName = 1;

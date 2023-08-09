@@ -10,7 +10,7 @@ function replaceDocument() {
   for (var i = 0; i < data.length; i++) {
     var newfiles = doc.makeCopy().getId(); // make a copy template, and get
     var dc = DocumentApp.openById(newfiles);
-    dc.setName(`Document for: ${data[i][DocName]}`);
+    dc.setName(`Document for_ ${data[i][DocName]}`);
     var url = dc.getUrl();
     var body = dc.getBody();
     for (var j =0; j < replacements.length; j++) {

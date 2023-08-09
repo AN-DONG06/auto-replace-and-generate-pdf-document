@@ -1,0 +1,23 @@
+function replaceDocument() {
+  const TemplateDoc = "1NBMLOUZFKur_mnhc_QeTBoIimmq_rbWstpIBeU5Ijnw";
+  const LinkCol = 6;
+  const InputSheet = "Test";
+  const DocName = 1;
+  var doc = DriveApp.getFileById(TemplateDoc);
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(InputSheet);
+  var data = sheet.getDataRange().getValues();
+  var replacements = data.shift();
+  for (var i = 0; i < data.length; i++) {
+    var newfiles = doc.makeCopy().getId(); // make a copy template, and get
+    var dc = DocumentApp.openById(newfiles);
+    dc.setName(`Document for: ${data[i][DocName]}`);
+    var url = dc.getUrl();
+    var body = dc.getBody();
+    for (var j =0; j < replacements.length; j++) {
+      var placeholder = "{" + replacements[j] + "}";
+      var value = data[i][j];
+      body.replaceText(placeholder, value);
+    }
+    sheet.getRange(i+2,LinkCol).setValue(url);
+  }
+}

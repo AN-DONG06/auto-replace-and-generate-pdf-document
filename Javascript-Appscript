@@ -18,6 +18,17 @@ function replaceDocument() {
       var value = data[i][j];
       body.replaceText(placeholder, value);
     }
-    sheet.getRange(i+2,LinkCol).setValue(url);
+    
+    // Create PDF from the document
+    var pdf = DriveApp.getFileById(newfiles).getAs("application/pdf");
+    var pdfName = `Document for: ${data[i][DocName]}.pdf`;
+    var folder = DriveApp.getFolderById("YOUR_FOLDER_ID"); // Replace with your folder ID
+    folder.createFile(pdf).setName(pdfName);
+    
+    // Delete the original document
+    DriveApp.getFileById(newfiles).setTrashed(true);
+
+    // Set pdf link
+    sheet.getRange(i+2,LinkCol).setValue(pdf.getUrl());
   }
 }
